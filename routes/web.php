@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/home/{name?}', [HomeController::class, 'index'])->name('home.index');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+
+Route::get('/admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
+// Route::resource('/admin/users', 'AdminUsersController');
+
+Route::get('/admin', function(){
+
+    return view('admin.index');
+
+});
