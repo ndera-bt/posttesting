@@ -28,8 +28,11 @@ Route::get('/home/{name?}', [HomeController::class, 'index'])->name('home.index'
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
-Route::get('/admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
-// Route::resource('/admin/users', 'AdminUsersController');
+// Route::get('/admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
+
+// Route::get('/admin/users/create', [AdminUsersController::class, 'create'])->name('admin.users.create');
+
+Route::resource('/admin/users', AdminUsersController::class);
 
 Route::get('/admin', function(){
 
