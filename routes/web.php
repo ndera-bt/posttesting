@@ -34,6 +34,12 @@ Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
 Route::resource('/admin/users', AdminUsersController::class);
 
+Route::get('/users/index', [AdminUsersController::class, 'index'])->name('admin.users.index');
+
+Route::get('/users/create', [AdminUsersController::class, 'create'])->name('admin.users.create');
+
+// Route::get('/admin/users', [AdminUsersController::class, 'create'])->name('create');
+
 Route::get('/admin', function(){
 
     return view('admin.index');

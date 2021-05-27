@@ -33,24 +33,10 @@
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{url('images/logo-mini.svg')}}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
-          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Welcome stallar dashboard!</h5>
+          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Welcome to Your dashboard!</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="#">
-              <i class="icon-magnifier"></i>
-              <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-            </form>
-            <li class="nav-item"><a href="#" class="nav-link"><i class="icon-basket-loaded"></i></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><i class="icon-chart"></i></a></li>
             <li class="nav-item dropdown">
-              <a class="nav-link count-indicator message-dropdown" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <i class="icon-speech"></i>
-                <span class="count">7</span>
-              </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-                <a class="dropdown-item py-3">
-                  <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
-                  <span class="badge badge-pill badge-primary float-right">View all</span>
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
@@ -76,24 +62,6 @@
                     <p class="font-weight-light small-text"> The meeting is cancelled </p>
                   </div>
                 </a>
-              </div>
-            </li>
-            <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
-              <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <div class="d-inline-flex mr-3">
-                  <i class="flag-icon flag-icon-us"></i>
-                </div>
-                <span class="profile-text font-weight-normal">English</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-left navbar-dropdown py-2" aria-labelledby="LanguageDropdown">
-                <a class="dropdown-item">
-                  <i class="flag-icon flag-icon-us"></i> English </a>
-                <a class="dropdown-item">
-                  <i class="flag-icon flag-icon-fr"></i> French </a>
-                <a class="dropdown-item">
-                  <i class="flag-icon flag-icon-ae"></i> Arabic </a>
-                <a class="dropdown-item">
-                  <i class="flag-icon flag-icon-ru"></i> Russian </a>
               </div>
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
@@ -152,19 +120,19 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Users</span>
-                <i class="icon-layers menu-icon"></i>
+                <i class="icon-people menu-icon"></i>
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('admin.users.index')}}">All Users</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('admin.users.create')}}">Create User</a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="pages/icons/simple-line-icons.html">
                 <span class="menu-title">Posts</span>
-                <i class="icon-globe menu-icon"></i>
+                <i class="icon-layers menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -175,7 +143,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="pages/charts/chartist.html">
-                <span class="menu-title">Charts</span>
+                <span class="menu-title">Media</span>
                 <i class="icon-chart menu-icon"></i>
               </a>
             </li>
@@ -211,22 +179,7 @@
         @show
         <!-- partial -->
         <div class="main-panel">
-            @yield('content')
           <div class="content-wrapper">
-            <div class="row purchace-popup">
-              <div class="col-12 stretch-card grid-margin">
-                <div class="card card-secondary">
-                  <span class="card-body d-lg-flex align-items-center">
-                    <p class="mb-lg-0">Like what you see? Check out our premium version for more.</p>
-                    <a href="https://github.com/BootstrapDash/StellarAdmin-Free-Bootstrap-Admin-Template" target="_blank" class="btn ml-lg-auto download-button btn-success btn-sm my-1 my-sm-0">Download Free Version</a>
-                    <a href="https://www.bootstrapdash.com/product/stellar-admin/" target="_blank" class="btn btn-warning purchase-button btn-sm ml-sm-2 my-1 my-sm-0">Upgrade To Pro</a>
-                    <button class="close popup-dismiss ml-2">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </div>
             <!-- Quick Action Toolbar Starts-->
             <div class="row quick-action-toolbar">
               <div class="col-md-12 grid-margin">
@@ -252,6 +205,7 @@
                 </div>
               </div>
             </div>
+            @yield('content')
             <!-- Quick Action Toolbar Ends-->
           </div>
           <!-- content-wrapper ends -->
@@ -271,7 +225,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <script src="{{url('vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{{url('vendors/chart.js/Chart.min.js')}}"></script>
