@@ -14,6 +14,7 @@
         <thead>
             <tr style="color: #00A03C;">
             <th class="font-weight-bold">ID</th>
+            <th class="font-weight-bold">PHOTO</th>
             <th class="font-weight-bold">NAME</th>
             <th class="font-weight-bold">EMAIL</th>
             <th class="font-weight-bold">ROLE</th>
@@ -28,6 +29,8 @@
             @foreach($users as $user)
     <tr>
         <td>{{$user->id}}</td>
+        <td><img height="50px" src="{{$user->photo ? $user->photo->file : '/images/default.PNG'}}" alt="img" class="img-responsive img-rounded">
+        </td>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
         <td>{{$user->role->name}}</td>
@@ -35,7 +38,7 @@
         <td>{{$user->created_at->diffForHumans()}}</td>
         <td>{{$user->updated_at->diffForHumans()}}</td>
         <td>
-            <div class="badge badge-warning p-2"><a href="">Update</a></div>
+            <div class="badge badge-warning p-2"><a href="{{route('admin.users.edit', $user->id)}}">Update</a></div>
             <div class="badge badge-warning p-2"><a href="">View</a></div>
         </td>
     </tr>

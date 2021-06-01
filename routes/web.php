@@ -38,6 +38,9 @@ Route::get('/users/index', [AdminUsersController::class, 'index'])->name('admin.
 
 Route::get('/users/create', [AdminUsersController::class, 'create'])->name('admin.users.create');
 
+Route::get('/users/edit/{id}', [AdminUsersController::class, 'edit'])->name('admin.users.edit');
+
+
 // Route::get('/admin/users', [AdminUsersController::class, 'create'])->name('create');
 
 Route::get('/admin', function(){
