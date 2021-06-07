@@ -28,7 +28,7 @@
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex align-items-center">
           <a class="navbar-brand brand-logo" href="index.html">
-            <img src="{{url('images/logo.svg')}}" alt="logo" class="logo-dark" />
+            <img src="{{url('images/favicon.png')}}" alt="logo" class="logo-dark" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{url('images/logo-mini.svg')}}" alt="logo" /></a>
         </div>
@@ -66,18 +66,22 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
+                <img class="img-xs rounded-circle ml-2" src="{{Auth::user()->photo ? Auth::user()->photo->file : '/images/default.PNG'}}" alt="Profile image"> <span class="font-weight-normal"> {{ Auth::user()->name }} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                  <p class="mb-1 mt-3">Allen Moreno</p>
-                  <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
+                  <img class="img-md rounded-circle" src="{{Auth::user()->photo ? Auth::user()->photo->file : '/images/default.PNG'}}" alt="Profile image">
+                  <p class="mb-1 mt-3">{{ Auth::user()->name }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ Auth::user()->email }}</p>
                 </div>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Messages</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Activity</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-question text-primary"></i> FAQ</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+                <a class="dropdown-item" href="{{route('admin.users.edit', Auth::user()->id)}}"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile</a>
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <x-jet-dropdown-link href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                                  this.closest('form').submit();">
+                    <i class="dropdown-item-icon icon-power text-primary dropdown-item">{{ __('Log Out') }}</i>
+                  </x-jet-dropdown-link>
+                </form>
               </div>
             </li>
           </ul>
@@ -94,12 +98,12 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
+                  <img class="img-xs rounded-circle" src="{{Auth::user()->photo ? Auth::user()->photo->file : '/images/default.PNG'}}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Allen Moreno</p>
-                  <p class="designation">Administrator</p>
+                  <p class="profile-name">{{ Auth::user()->name }}</p>
+                  <p class="designation">{{ Auth::user()->role->name }}</p>
                 </div>
                 <div class="icon-container">
                   <i class="icon-bubbles"></i>
@@ -130,10 +134,16 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/simple-line-icons.html">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basics" aria-expanded="false" aria-controls="ui-basics">
                 <span class="menu-title">Posts</span>
                 <i class="icon-layers menu-icon"></i>
               </a>
+              <div class="collapse" id="ui-basics">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{{route('admin.posts.index')}}">All Posts</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{route('admin.posts.create')}}">Create Post</a></li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="pages/forms/basic_elements.html">
@@ -186,20 +196,20 @@
                 <div class="card">
                   <div class="card-header d-block d-md-flex">
                     <h5 class="mb-0">Quick Actions</h5>
-                    <p class="ml-auto mb-0">How are your active users trending overtime?<i class="icon-bulb"></i></p>
+                    <p class="ml-auto mb-0">Quick actions on your dashboard<i class="icon-bulb"></i></p>
                   </div>
                   <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"> <i class="icon-user mr-2"></i> Add Client</button>
+                      <button type="button" class="btn px-0"> <i class="icon-user mr-2"></i> View Profile</button>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"><i class="icon-docs mr-2"></i> Create Quote</button>
+                      <button type="button" class="btn px-0"><i class="icon-docs mr-2"></i> Create User</button>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"><i class="icon-folder mr-2"></i> Enter Payment</button>
+                      <button type="button" class="btn px-0"><i class="icon-folder mr-2"></i> Edit User</button>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <button type="button" class="btn px-0"><i class="icon-book-open mr-2"></i>Create Invoice</button>
+                      <button type="button" class="btn px-0"><i class="icon-book-open mr-2"></i>Remove user</button>
                     </div>
                   </div>
                 </div>
@@ -214,7 +224,6 @@
               @yield('footer')
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="icon-heart text-danger"></i></span>
             </div>
           </footer>
           <!-- partial -->

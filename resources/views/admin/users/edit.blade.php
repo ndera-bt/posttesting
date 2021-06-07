@@ -51,7 +51,15 @@
             </div>
 
             <div class ='form-group'>
-                {!! Form::submit('Create User') !!}
+                {!! Form::submit('Update User', ['class'=>'btn btn-primary col-sm-6']) !!}
+            </div>
+
+        {!! Form::close() !!}
+
+        {!! Form::open(['action'=>['App\Http\Controllers\AdminUsersController@destroy', $user->id], 'method' => 'DELETE', 'enctype'=>'multipart/form-data', 'class' => 'container']) !!}    
+
+            <div class ='form-group'>
+                {!! Form::submit('Delete User', ['class'=>'btn btn-danger col-sm-6']) !!}
             </div>
 
         {!! Form::close() !!}
