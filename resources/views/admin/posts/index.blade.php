@@ -24,7 +24,7 @@
         <tr>
             <td>{{$post->id}}</td>
             <td>{{$post->user->name}}</td>
-            <td>{{$post->category_id}}</td>
+            <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
             <td><img height="50px" src="{{$post->photo ? $post->photo->file : '/images/default.PNG'}}" alt="img" class="img-responsive img-rounded">
             </td>
             <td>{{$post->title}}</td>
